@@ -1,3 +1,6 @@
+# Private workflow docs - never commit
+CLAUDE.md
+
 # Data (download from OpenNeuro)
 data/
 nilearn_cache/
@@ -20,3 +23,7 @@ __pycache__/
 
 # macOS
 .DS_Store
+
+# Patent-sensitive extensions - DO NOT COMMIT
+extensions/
+extensions/**
