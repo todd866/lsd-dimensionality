@@ -85,13 +85,7 @@ All available from OpenNeuro or original authors.
 
 ## Submission Status
 
-![Status](https://img.shields.io/badge/Translational_Psychiatry-Submitted-yellow)
-
-| Date | Event | Details |
-|------|-------|---------|
-| 2025-12-04 | Submitted | Nature Communications (NCOMMS-25-98245) |
-| 2025-12-10 | Desk rejection | NC - "better fit for specialist journal" |
-| 2025-12-11 | Resubmitted | Translational Psychiatry |
+![Status](https://img.shields.io/badge/Translational_Psychiatry-Under_Review-yellow)
 
 **Corresponding Author:** Ian Todd (University of Sydney)
 
