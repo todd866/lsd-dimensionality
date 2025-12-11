@@ -83,9 +83,9 @@ python3 analysis/compute_meg_deff.py
 
 All available from OpenNeuro or original authors.
 
-## Submission Status
+## Status
 
-![Status](https://img.shields.io/badge/Translational_Psychiatry-Under_Review-yellow)
+![Status](https://img.shields.io/badge/Translational_Psychiatry-In_Prep-blue)
 
 **Corresponding Author:** Ian Todd (University of Sydney)
 
