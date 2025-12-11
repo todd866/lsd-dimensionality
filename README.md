@@ -1,56 +1,58 @@
 # Psychedelics as Dimensionality Modulators
 
-Code and analysis for the paper: **"Psychedelics as Dimensionality Modulators: A Unified Framework for Serotonergic Brain State Expansion"**
+Code and analysis for the paper: **"Psychedelics as Dimensionality Modulators: A Cortical Reservoir Theory of Serotonergic Plasticity"**
 
-Target journal: *Nature Communications*
+Target journal: *Translational Psychiatry*
 
 ## Overview
 
-This repository accompanies our theoretical framework proposing that classical psychedelics primarily modulate the **effective dimensionality** of cortical dynamics through 5-HT2A-mediated dendritic gain amplification.
+This repository accompanies our framework proposing that classical psychedelics modulate the **effective dimensionality** of cortical dynamics through 5-HT2A-mediated dendritic gain amplification. MEG analysis reveals a mechanism-specific dissociation: psychedelics desynchronize, ketamine does not.
 
-### Key Findings
+### Key Finding: Mechanism-Specific Dissociation
+
+| Compound | N pairs | Coherence Change | p-value | Cohen's d |
+|----------|---------|------------------|---------|-----------|
+| Psilocybin | 20 | **-15.0%** | **0.003** | -0.78 |
+| LSD | 15 | **-13.4%** | 0.082 | -0.50 |
+| Ketamine | 18 | +5.7% | 0.290 | +0.26 |
+| Tiagabine | 15 | +10.8% | 0.307 | +0.28 |
+
+**Key insight**: Classical psychedelics (5-HT2A agonists) produce significant oscillatory desynchronization, while ketamine (NMDA antagonist) shows no effect. This specificity suggests that while both drug classes produce altered states, only serotonergic psychedelics function by dismantling the intrinsic oscillatory constraints of the cortex.
+
+### fMRI Validation
 
 | Dataset | Compound | D_eff Change | Spectral Centroid | p-value |
 |---------|----------|--------------|-------------------|---------|
 | ds003059 (N=15) | LSD | +8.6% | +10.0% | p=0.0008 |
 | ds006072 (N=1) | Psilocybin | +19.2% | +18.6% | p=0.044 |
 
-**Key finding**: Psilocybin shows ~2x the spectral centroid shift of LSD, quantifying the "organic vs geometric" phenomenological distinction.
-
-### Within-Subject Pharmacological Dissociation
-
-In the psilocybin study (ds006072), a single subject (P1) received both psilocybin and methylphenidate:
-- **Psilocybin**: +25.2% D_eff, MEQ Mystical = 4.37/5
-- **Methylphenidate**: -15.7% D_eff, MEQ Mystical = 0.0/5
-
 ## Structure
 
 ```
-├── lsd_dimensionality.tex        # Full manuscript (LaTeX)
-├── lsd_dimensionality.pdf        # Compiled PDF
-├── references.bib                # Bibliography
-├── cover_letter.tex              # Cover letter
-├── figures/                      # Publication figures
-│   ├── generate_figures.py       # Main results figures
-│   ├── fig1_eigenmode_mechanism.py  # Conceptual framework (Fig 1)
-│   ├── fig2_three_phase_model.py    # Three-phase model (Fig 2)
-│   └── *.pdf, *.png              # Generated figures
-├── analysis/                     # Analysis code
-│   ├── compute_dimensionality.py         # D_eff for LSD dataset
-│   ├── compute_spectral_centroid.py      # Spectral centroid for LSD
-│   ├── compute_psilocybin_deff.py        # D_eff for psilocybin
-│   ├── compute_psilocybin_spectral_centroid.py  # Spectral for psilocybin
-│   ├── compute_psilocybin_cifti.py       # CIFTI handling
-│   └── download_lsd_data.py              # Data download helper
-└── data/                         # fMRI data (not tracked, download from OpenNeuro)
+├── lsd_dimensionality.tex               # Full manuscript (LaTeX)
+├── lsd_dimensionality.pdf               # Compiled PDF
+├── references.bib                       # Bibliography
+├── cover_letter_translational_psychiatry.tex  # Cover letter
+├── figures/                             # Publication figures
+│   ├── generate_figures.py              # Figure generation script
+│   ├── fig1_eigenmode_mechanism.pdf     # Conceptual framework
+│   ├── fig2_three_phase_model.pdf       # Three-phase model
+│   ├── fig3_meg_compound_comparison.pdf # MEG results (key figure)
+│   └── fig4_mechanism_specificity.pdf   # Psilocybin vs ketamine
+├── analysis/                            # Analysis code
+│   ├── compute_dimensionality.py        # D_eff for LSD fMRI
+│   ├── compute_meg_deff.py              # D_eff for MEG data
+│   ├── compute_spectral_centroid.py     # Spectral centroid
+│   └── download_lsd_data.py             # Data download helper
+└── data/                                # Data (not tracked)
 ```
 
 ## Key Concepts
 
 - **Effective Dimensionality (D_eff)**: Participation ratio of covariance eigenvalues
-- **Spectral Centroid**: Center of mass of eigenspectrum (higher = more geometric modes)
-- **Three-Phase Model**: Acute expansion → Refractory compression → Recanalization
-- **Mechanism**: 5-HT2A activation → dendritic gain amplification → eigenmode expansion
+- **Oscillatory Coherence**: MEG-derived measure of synchronized cortical activity
+- **Three-Phase Model**: Overshoot → Refractory → Recanalization
+- **Mechanism**: 5-HT2A activation → dendritic gain amplification → desynchronization
 
 ## Running the Analysis
 
@@ -58,7 +60,6 @@ In the psilocybin study (ds006072), a single subject (P1) received both psilocyb
 
 ```bash
 pip install numpy matplotlib nibabel nilearn pandas scipy
-brew install awscli  # for OpenNeuro download
 ```
 
 ### Generate figures
@@ -68,41 +69,35 @@ cd figures
 python3 generate_figures.py
 ```
 
-### Compute D_eff on LSD dataset
+### Compute MEG D_eff
 
 ```bash
-python3 analysis/compute_dimensionality.py
-```
-
-### Compute spectral centroid
-
-```bash
-python3 analysis/compute_spectral_centroid.py
+python3 analysis/compute_meg_deff.py
 ```
 
 ## Datasets
 
-- **ds003059**: Carhart-Harris LSD dataset (N=15, placebo-controlled crossover)
+- **MEG**: Muthukumaraswamy et al. (2013) - LSD, psilocybin, ketamine, tiagabine
+- **ds003059**: Carhart-Harris LSD fMRI (N=15, placebo-controlled crossover)
 - **ds006072**: Siegel psilocybin precision mapping (N=7, longitudinal)
 
-Both available from OpenNeuro.
+All available from OpenNeuro or original authors.
 
 ## Submission Status
 
-![Status](https://img.shields.io/badge/Nature_Comms-Under_Review-yellow)
-![Preprint](https://img.shields.io/badge/Preprint-In_Review_(Research_Square)-blue)
+![Status](https://img.shields.io/badge/Translational_Psychiatry-Submitted-yellow)
 
 | Date | Event | Details |
 |------|-------|---------|
-| 2024-12-04 | Submitted | NCOMMS-25-98245 |
-| 2024-12-04 | Initial screening | Editor not yet assigned |
+| 2025-12-04 | Submitted | Nature Communications (NCOMMS-25-98245) |
+| 2025-12-10 | Desk rejection | NC - "better fit for specialist journal" |
+| 2025-12-11 | Resubmitted | Translational Psychiatry |
 
-**Manuscript:** NCOMMS-25-98245
-**Type:** Article
 **Corresponding Author:** Ian Todd (University of Sydney)
-**Subject:** Computational Neuroscience / Cognitive Neuroscience
 
-<!-- Update badge: Under_Review (yellow), Revision_Requested (orange), Accepted (green), Rejected (red) -->
+## Interactive Simulation
+
+Try the companion simulation at [coherencedynamics.com/simulations/lsd-landscape](https://coherencedynamics.com/simulations/lsd-landscape) — drag to modulate 5-HT2A gain and watch cortical oscillators desynchronize.
 
 ## Citation
 
@@ -111,7 +106,7 @@ Both available from OpenNeuro.
   title={Psychedelics as Dimensionality Modulators: A Cortical Reservoir Theory of Serotonergic Plasticity},
   author={Todd, Ian},
   year={2025},
-  note={Under review at Nature Communications (NCOMMS-25-98245)}
+  note={Under review at Translational Psychiatry}
 }
 ```
 
