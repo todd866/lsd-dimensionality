@@ -1,9 +1,13 @@
 # Private workflow docs - never commit
 CLAUDE.md
 
+# Build artifacts archive
+archive/
+
 # Data (download from OpenNeuro)
 data/
 nilearn_cache/
+results/
 
 # LaTeX build artifacts
 *.aux

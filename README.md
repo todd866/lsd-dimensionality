@@ -87,9 +87,22 @@ python3 analysis/compute_spectral_centroid.py
 
 Both available from OpenNeuro.
 
-## Status
+## Submission Status
 
-**Submitted** - Nature Communications (NCOMMS-25-98245), December 4, 2025.
+![Status](https://img.shields.io/badge/Nature_Comms-Under_Review-yellow)
+![Preprint](https://img.shields.io/badge/Preprint-In_Review_(Research_Square)-blue)
+
+| Date | Event | Details |
+|------|-------|---------|
+| 2024-12-04 | Submitted | NCOMMS-25-98245 |
+| 2024-12-04 | Initial screening | Editor not yet assigned |
+
+**Manuscript:** NCOMMS-25-98245
+**Type:** Article
+**Corresponding Author:** Ian Todd (University of Sydney)
+**Subject:** Computational Neuroscience / Cognitive Neuroscience
+
+<!-- Update badge: Under_Review (yellow), Revision_Requested (orange), Accepted (green), Rejected (red) -->
 
 ## Citation
 
