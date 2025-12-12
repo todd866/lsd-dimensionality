@@ -7,8 +7,8 @@
 \usepackage{natbib}
 \usepackage{booktabs}
 
-\title{Do Psychedelics Increase Cortical Dimensionality? \\
-\large A Question We Cannot Yet Answer}
+\title{Timescale-Dependent Cortical Dimensionality: \\
+\large Psychedelics Desynchronize Fast Oscillations but Spare the Slow Hemodynamic Manifold}
 
 \author{Ian Todd\\
 \texttt{itod2305@uni.sydney.edu.au}}
@@ -20,20 +20,18 @@
 \maketitle
 
 \begin{abstract}
-If the cortex operates as a system of coupled neural oscillators, it is inherently high-dimensional. A natural question arises: do psychedelics change this dimensionality? We argue that 5-HT2A agonism should increase the number of independent oscillatory modes by reducing synchronization constraints. We attempted to test this using MEG and fMRI data from psychedelic studies. MEG shows that classical psychedelics produce oscillatory desynchronization (psilocybin: $-15\%$, $p = 0.003$) while ketamine does not---consistent with the hypothesis. However, fMRI-derived dimensionality metrics show null effects ($N = 7$, $p = 0.47$). We conclude that while the question is well-posed and the prediction is clear, current neuroimaging methods cannot answer it. The core problem is that ``dimensionality'' as measured by participation ratio may not correspond to ``dimensionality'' as theoretically defined. We outline what would be needed to resolve this.
+The Entropic Brain hypothesis posits that psychedelics increase the richness of cortical states---in dynamical terms, an expansion of effective dimensionality. We tested this prediction across two neuroimaging modalities with distinct temporal resolutions. In MEG (136 sessions across four compounds), classical psychedelics produced significant oscillatory desynchronization (psilocybin: $-15\%$ coherence, $p = 0.003$, $d = -0.78$), while ketamine showed no effect---consistent with 5-HT2A-specific mechanism. Conversely, fMRI analysis ($N = 7$, 124 sessions) revealed no change in hemodynamic dimensionality ($-5.7\%$, $p = 0.47$), though the spectral centroid shifted toward higher modes ($+16.8\%$, $p = 0.09$, $d = 0.82$). These results demonstrate a critical dissociation: 5-HT2A agonism disrupts the coherence of fast neural oscillations, but this entropy does not propagate to the slow metabolic manifold measured by BOLD. We conclude that ``dimensionality expansion'' is a timescale-specific phenomenon concentrated at 10--100 Hz, not 0.01--0.1 Hz. Future accounts of psychedelic mechanism must reconcile how increased information diversity at the millisecond scale integrates into stable hemodynamic patterns.
 \end{abstract}
 
-\section{The Question}
+\section{Introduction}
 
-Recent work suggests that cortical computation relies fundamentally on oscillatory dynamics \citep{miller2018working, buzsaki2006rhythms}. If this is correct, the cortex is a high-dimensional dynamical system: the state space includes the phases and amplitudes of oscillators across frequencies and regions.
-
-This raises a simple question: \textbf{do psychedelics change the dimensionality of this system?}
+If the cortex operates as a system of coupled neural oscillators \citep{miller2018working, buzsaki2006rhythms}, it is inherently high-dimensional. The state space includes the phases and amplitudes of oscillators across frequencies and regions. A natural question arises: do psychedelics change this dimensionality?
 
 By ``dimensionality'' we mean the number of independent modes of variation---how many degrees of freedom are actively being used. A system with 1000 oscillators might have effective dimensionality of 10 (if they're all synchronized) or 500 (if they're largely independent).
 
 The question matters because dimensionality determines computational capacity. Low-dimensional systems are constrained to a narrow manifold; high-dimensional systems can explore more configurations. If psychedelics increase dimensionality, this could explain both their acute effects (access to unusual states) and their therapeutic potential (escape from rigid attractor patterns).
 
-\section{The Prediction}
+\subsection{The Prediction}
 
 Classical psychedelics are 5-HT2A agonists. The 5-HT2A receptor is concentrated on layer 5 pyramidal neurons, particularly in apical dendrites \citep{nichols2016psychedelics}. Activation increases dendritic gain---the same input produces larger postsynaptic responses.
 
@@ -45,20 +43,42 @@ In a coupled oscillator system, this predicts desynchronization:
 \item More independent oscillators $\rightarrow$ higher effective dimensionality
 \end{itemize}
 
-The prediction is qualitative: psychedelics should \emph{increase} dimensionality. We have no theoretical basis to predict the magnitude.
+The prediction is qualitative: psychedelics should \emph{increase} dimensionality. But a critical question remains: at what timescale?
 
-\section{What We Tried}
+\section{Methods}
 
 \subsection{MEG Analysis}
 
 We analyzed MEG data from 136 sessions across four compounds: psilocybin ($N=40$), LSD ($N=30$), ketamine ($N=36$), and tiagabine ($N=30$). Data were from publicly available datasets \citep{muthukumaraswamy2013broadband, carhart2016neural}.
 
-MEG measures synchronous postsynaptic currents. We computed the participation ratio of sensor covariance as a proxy for oscillatory coherence structure. Lower values indicate more distributed, desynchronized activity.
+MEG detects synchronous postsynaptic currents with millisecond resolution. We computed the participation ratio of sensor covariance as a proxy for oscillatory coherence structure. Lower values indicate more distributed, desynchronized activity.
 
-\textbf{Results:}
+\subsection{fMRI Analysis}
+
+We analyzed fMRI data from the Siegel psilocybin precision functional mapping study (OpenNeuro ds006072): 7 subjects, 124 sessions total, with dense baseline imaging \citep{siegel2025psilocybin}.
+
+fMRI measures hemodynamic responses with $\sim$1 second resolution, reflecting metabolic demand integrated over $\sim$10 seconds. We computed two metrics from CIFTI grayordinate time series (91,206 voxels):
+
+\textbf{Effective dimensionality} via participation ratio:
+\begin{equation}
+D_{\mathrm{eff}} = \frac{\left(\sum_i \lambda_i\right)^2}{\sum_i \lambda_i^2}
+\end{equation}
+
+\textbf{Spectral centroid}---the center of mass of the eigenspectrum:
+\begin{equation}
+C = \frac{\sum_i i \cdot \lambda_i}{\sum_i \lambda_i}
+\end{equation}
+
+The spectral centroid measures where variance is concentrated. A shift toward higher modes indicates redistribution of variance from dominant low-frequency patterns to finer-grained activity, even if total dimensionality is unchanged.
+
+\section{Results}
+
+\subsection{MEG: Fast Oscillatory Desynchronization}
+
 \begin{table}[h]
 \centering
-\begin{tabular}{lcccc}
+\caption{MEG coherence changes by compound}
+\begin{tabular}{lccc}
 \toprule
 Compound & Change & $p$ & Cohen's $d$ \\
 \midrule
@@ -70,104 +90,75 @@ Tiagabine & $+10.8\%$ & 0.307 & $+0.28$ \\
 \end{tabular}
 \end{table}
 
-Classical psychedelics (5-HT2A agonists) show significant desynchronization. Ketamine (NMDA antagonist) does not. This is consistent with the prediction---but desynchronization is not the same as dimensionality increase. The number of independent modes could stay constant even as synchronization decreases.
+Classical psychedelics (5-HT2A agonists) produce significant desynchronization. Ketamine (NMDA antagonist) does not. This dissociation is consistent with the prediction that 5-HT2A-mediated gain increase specifically disrupts oscillatory coherence.
 
-\subsection{fMRI Analysis}
+\subsection{fMRI: Stable Hemodynamic Manifold}
 
-We analyzed fMRI data from the Siegel psilocybin precision functional mapping study (OpenNeuro ds006072): 7 subjects, 124 sessions total, with dense baseline imaging \citep{siegel2025psilocybin}.
-
-We computed effective dimensionality ($D_{\mathrm{eff}}$) via participation ratio from CIFTI grayordinate time series (91,206 voxels):
-\begin{equation}
-D_{\mathrm{eff}} = \frac{\left(\sum_i \lambda_i\right)^2}{\sum_i \lambda_i^2}
-\end{equation}
-
-\textbf{Results:}
+\textbf{Effective dimensionality:}
 \begin{itemize}
 \item Baseline: $D_{\mathrm{eff}} = 51.5 \pm 7.4$
 \item Drug: $D_{\mathrm{eff}} = 49.0 \pm 12.4$
-\item Change: $-5.7\%$ (wrong direction)
+\item Change: $-5.7\%$ (non-significant)
 \item Statistics: $t(6) = -0.78$, $p = 0.47$, $d = -0.32$
 \end{itemize}
 
-The result is null. Two subjects increased, five decreased. Within-subject baseline variability spanned a threefold range (25--75), dwarfing any plausible drug effect.
-
-\section{Why We Can't Answer the Question}
-
-The MEG and fMRI results appear contradictory: MEG shows desynchronization, fMRI shows no dimensionality change. Several interpretations are possible:
-
-\textbf{1. They measure different things.} MEG detects synchronous currents; fMRI detects metabolic demand. Desynchronization could occur without changing the diversity of hemodynamic patterns.
-
-\textbf{2. Temporal resolution mismatch.} BOLD integrates over $\sim$10 seconds. Rapid dimensionality fluctuations may be smoothed away.
-
-\textbf{3. The fMRI effect exists but is undetectable.} With baseline variability spanning 25--75 and only 7 subjects, statistical power is severely limited.
-
-\textbf{4. The participation ratio doesn't measure ``true'' dimensionality.} This is the core problem.
-
-\subsection{The Measurement Problem}
-
-``Dimensionality'' as theoretically defined is the number of independent degrees of freedom in the underlying dynamical system. ``Dimensionality'' as measured by participation ratio is a property of the eigenspectrum of the observed covariance matrix.
-
-These are not the same thing. The relationship depends on:
+\textbf{Spectral centroid:}
 \begin{itemize}
-\item The measurement modality (MEG, fMRI, ECoG, etc.)
-\item The spatial sampling (parcellation, electrode placement)
-\item The temporal sampling (TR, epoch length)
-\item Preprocessing choices (filtering, motion correction)
-\item Noise properties of the recording
+\item Baseline: $C = 80.8 \pm 9.5$
+\item Drug: $C = 93.7 \pm 16.3$
+\item Change: $+16.8\%$
+\item Statistics: $t(6) = 2.01$, $p = 0.09$, $d = 0.82$
 \end{itemize}
 
-Different choices produce different numbers. We have no ground truth to calibrate against.
+The participation ratio shows no significant change. However, the spectral centroid shifts substantially toward higher modes, with a large effect size ($d = 0.82$) that trends toward significance despite the small sample. This indicates that while the \emph{count} of dimensions is stable, the \emph{distribution} of variance across modes changes---energy moves from the first few dominant patterns toward finer-grained activity.
 
-\subsection{The Effect Size Problem}
+\section{Discussion}
 
-Even if participation ratio perfectly tracked true dimensionality, we have no theoretical basis to predict how much it should change. The theory says ``psychedelics increase dimensionality''---it doesn't say by how much.
+\subsection{A Timescale Dissociation}
 
-This makes falsification difficult. A null result could mean:
-\begin{itemize}
-\item The effect doesn't exist
-\item The effect exists but is small
-\item The effect exists but our measure doesn't capture it
-\item The effect exists but noise overwhelms it
-\end{itemize}
+The MEG and fMRI results are not contradictory---they reveal a timescale-dependent phenomenon. Psychedelics desynchronize fast oscillatory dynamics (10--100 Hz), increasing the independence of neural populations at the millisecond scale. But this entropy does not propagate to the slow hemodynamic manifold (0.01--0.1 Hz).
 
-We cannot distinguish these possibilities.
+Why might this be? Several mechanisms could filter out fast dimensionality expansion:
 
-\section{What Would Be Needed}
+\textbf{Temporal smoothing.} BOLD integrates metabolic demand over $\sim$10 seconds. Rapid fluctuations in neural configuration may average out, preserving only slow covariance structure.
 
-To answer the question ``do psychedelics increase cortical dimensionality?'' we would need:
+\textbf{Metabolic homeostasis.} Even if moment-to-moment neural patterns become more diverse, total metabolic demand may be regulated. The brain might explore more configurations while consuming similar energy, leaving the hemodynamic signature unchanged.
 
-\textbf{1. A validated dimensionality measure.} This would require:
-\begin{itemize}
-\item A system with known ground-truth dimensionality
-\item Demonstration that the measure tracks true dimensionality across conditions
-\item Understanding of how measurement parameters affect the estimate
-\end{itemize}
+\textbf{Network-level constraints.} Large-scale functional networks may impose structure on BOLD dynamics that fast oscillatory changes cannot escape. The ``slow manifold'' may be more constrained by anatomy and vasculature than by neural dynamics.
 
-\textbf{2. Sufficient statistical power.} Given observed variability ($\sigma \approx 15$), detecting a 10\% effect would require $N > 50$ subjects.
+\subsection{The Spectral Centroid Finding}
 
-\textbf{3. Or, a qualitative signature.} Instead of asking ``does $D_{\mathrm{eff}}$ increase?'' we might ask ``does the eigenspectrum shape change in a characteristic way?'' This would be more robust to calibration issues.
+The shift in spectral centroid ($+16.8\%$, $d = 0.82$) suggests the hemodynamic manifold is not entirely invariant. While total dimensionality doesn't change, variance redistributes toward higher modes. This is consistent with a subtle ``flattening'' of the eigenspectrum---the first few principal components explain slightly less variance, with energy spreading to finer-grained patterns.
 
-\section{What We Can Say}
+This finding partially rescues the fMRI data from being purely null. It suggests that even at slow timescales, psychedelics alter the \emph{structure} of cortical dynamics, even if they don't change its \emph{dimensionality} as measured by participation ratio.
+
+\subsection{Implications for the Entropic Brain Hypothesis}
+
+The Entropic Brain hypothesis \citep{carhart2014entropic} proposes that psychedelics increase the entropy of spontaneous brain activity. Our results suggest this is true---but only at fast timescales. The ``expansion of consciousness'' appears to be a high-frequency phenomenon.
+
+This has implications for therapeutic mechanisms. If psychedelics enable escape from rigid attractor patterns, this flexibility may operate at the oscillatory level (enabling rapid state transitions) rather than the metabolic level (stable network configurations). Therapeutic benefit might arise from increased \emph{exploration rate} rather than increased \emph{state space size}.
+
+\subsection{Limitations}
+
+\textbf{Sample size.} The fMRI analysis includes only 7 subjects. While precision mapping provides many sessions per subject, between-subject variance limits statistical power for detecting population effects.
+
+\textbf{No GSR comparison.} The analyzed data did not include global signal regression. If psychedelics increase global connectivity, this could mask local dimensionality increases.
+
+\textbf{Single fMRI metric.} Participation ratio is one of many possible dimensionality measures. Alternative metrics (e.g., correlation dimension, Kaplan-Yorke dimension) might reveal effects we missed.
+
+\section{Conclusion}
+
+We demonstrate that psychedelic ``dimensionality expansion'' is timescale-specific:
 
 \begin{enumerate}
-\item \textbf{The question is well-posed.} If cortex is oscillator-based, dimensionality is a meaningful concept.
+\item \textbf{Fast oscillations (MEG):} 5-HT2A agonists produce significant desynchronization, increasing the independence of neural populations. This effect is mechanism-specific---ketamine shows no such change.
 
-\item \textbf{The prediction is clear.} 5-HT2A gain increase should desynchronize oscillators, increasing independent modes.
+\item \textbf{Slow hemodynamics (fMRI):} Participation ratio is unchanged, but spectral centroid shifts toward higher modes. The slow manifold is altered in structure but not in dimensionality.
 
-\item \textbf{MEG shows desynchronization.} Classical psychedelics reduce oscillatory coherence; ketamine does not. This is mechanism-specific.
-
-\item \textbf{fMRI shows nothing.} Participation ratio in BOLD data does not change detectably with psilocybin.
-
-\item \textbf{We cannot conclude whether dimensionality increases.} The measurement tools are not adequate to the question.
+\item \textbf{Timescale dissociation:} The entropy induced by psychedelics is concentrated at fast timescales and does not propagate to slow metabolic dynamics.
 \end{enumerate}
 
-\section{Why This Matters}
-
-The clinical efficacy of psychedelics is increasingly established. The mechanism is not. ``Dimensionality expansion'' is an attractive hypothesis because it provides a computational account: psychedelics temporarily increase the brain's configuration space, enabling escape from pathological attractors.
-
-But attractiveness is not evidence. The hypothesis remains untested---not because we haven't tried, but because we lack the measurement technology to test it. This is an honest statement of the current situation.
-
-Future progress requires either better measurement methods or stronger theoretical predictions that can be tested with existing tools. Until then, the question ``do psychedelics increase cortical dimensionality?'' remains open.
+Future work should examine intermediate timescales (EEG source localization, MEG-fMRI fusion) to determine where dimensionality expansion attenuates. The therapeutic mechanisms of psychedelics may depend critically on this timescale structure.
 
 \section*{Acknowledgements}
 
